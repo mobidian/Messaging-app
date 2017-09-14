@@ -1,6 +1,7 @@
 import {  Component, OnInit } from '@angular/core';
 import { MessageService } from "./message.service";
 import { Message } from "./message.model";
+import { NgForm } from "@angular/forms/forms";
 
 
 @Component({
@@ -14,8 +15,10 @@ export class MessageInputComponent implements OnInit {
 
     ngOnInit() {}
 
-    onSave(value: string) {
-        const message = new Message(value, 'John');
+    onSubmit(form:NgForm) {
+        const message = new Message(form.value.content, 'John');
         this.messageService.addMessages(message);
+        form.resetForm();
     }
+   
 }
