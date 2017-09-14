@@ -11,7 +11,7 @@ export class MessageService {
     private messages:Message[]=[];
     constructor(private http: Http) { }
     
-    addMessages(message:Message){
+    addMessage(message:Message){
         this.messages.push(message);
         const body= JSON.stringify(message);
         const headers= new Headers({'Content-Type':'application/json'});
@@ -22,12 +22,23 @@ export class MessageService {
       //  console.log(this.messages);
     }
     getMessages(){
-        return this.messages;
+        return this.http.get('http://localhost:3000/message')
+                        .map((response:Response)=>{
+                            //Message from server side sent in obj field
+                            const messages=response.json().obj;
+                            let transformedMessages:Message[]=[];
+                            //Here fetching the transformed messages basically
+                            for(let message of messages){
+                                transformedMessages.push(new Message(message.content,'Dummy',message.id,null));
+                            }
+                            this.messages=transformedMessages;
+                            return transformedMessages;
+                        }).catch((error: Response) => Observable.throw(error.json()));
     }
 
-    // editMessage(){
-
-    // }
+    editMessage(message:Message){
+        
+    }
 
     //Look for the index of message and then delete the same
     deleteMessage(message:Message){

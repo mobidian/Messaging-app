@@ -24,13 +24,13 @@ import { MessageService } from "./message.service";
 export class MessageComponent implements OnInit {
     //Means, message can be assigned from outside
    @Input('inputMessage') message:Message
-   @Output() editClicked = new EventEmitter<string>();
+  // @Output() editClicked = new EventEmitter<string>();
     constructor(private messageService:MessageService) { }
 
     ngOnInit() { }
 
     onEdit(){
-       this.editClicked.emit('A new value from message component to app component!');
+      
     }
     onDelete(){
         this.messageService.deleteMessage(this.message);
