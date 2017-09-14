@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Message } from "./message.model";
 
 @Component({
@@ -23,7 +23,12 @@ import { Message } from "./message.model";
 export class MessageComponent implements OnInit {
     //Means, message can be assigned from outside
    @Input('inputMessage') message:Message
+   @Output() editClicked = new EventEmitter<string>();
     constructor() { }
 
     ngOnInit() { }
+
+    onEdit(){
+       this.editClicked.emit('A new value from message component to app component!');
+    }
 }
