@@ -30,9 +30,12 @@ export class MessageComponent implements OnInit {
     ngOnInit() { }
 
     onEdit(){
-      
+      this.messageService.editMessage(this.message);
     }
-    onDelete(){
-        this.messageService.deleteMessage(this.message);
+    onDelete() {
+        this.messageService.deleteMessage(this.message)
+            .subscribe(
+                result => console.log(result)
+            );
     }
 }
