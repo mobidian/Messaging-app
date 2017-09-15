@@ -3,8 +3,8 @@
         <ul class="nav nav-tabs">
             <!-- auth/signup -->
             <li routerLinkActive="active"> <a [routerLink]="['signup']">Sign Up</a></li>
-            <li routerLinkActive="active"> <a [routerLink]="['signin']">Sign In</a></li>
-            <li routerLinkActive="active"> <a [routerLink]="['logout']">Logout</a></li>
+            <li routerLinkActive="active" *ngIf="!isLoggedIn()"> <a [routerLink]="['signin']">Sign In</a></li>
+            <li routerLinkActive="active" *ngIf="isLoggedIn()"> <a [routerLink]="['logout']">Logout</a></li>
         </ul>
     </nav>
 </header>

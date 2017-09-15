@@ -38,4 +38,8 @@ export class MessageComponent implements OnInit {
                 result => console.log(result)
             );
     }
+
+    belongsToUser() {
+        return localStorage.getItem('userId') == this.message.userId;
+    }
 }
